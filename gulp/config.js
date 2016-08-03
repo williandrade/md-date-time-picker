@@ -20,7 +20,7 @@ module.exports = {
     css: 'dist/css/',
     themes: 'dist/css/themes/',
     html: 'dist/*.html',
-    images: 'dist/images/',
+    images: 'dist/vendor/',
     js: 'dist/js'
   },
   tasks: [
