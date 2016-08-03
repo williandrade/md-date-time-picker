@@ -18,7 +18,7 @@
   text-transform: uppercase;
   outline: none;
   cursor: pointer;
-  color: #009688;
+  color: #2196f3;
   -webkit-appearance: button;
   overflow: visible;
   -webkit-tap-highlight-color: transparent;
@@ -54,7 +54,7 @@
   z-index: 99999; }
   .mddtp-picker .mddtp-picker__header {
     width: 100px;
-    background-color: #009688;
+    background-color: #2196f3;
     padding: 24px 24px 20px; }
     .mddtp-picker .mddtp-picker__header .mddtp-picker__title {
       color: rgba(255, 255, 255, 0.7);
@@ -169,10 +169,10 @@
       line-height: 36px;
       vertical-align: middle; }
       .mddtp-picker__body .mddtp-picker__viewHolder .mddtp-picker__grid span.mddtp-picker__cell--today {
-        color: #009688;
+        color: #2196f3;
         font-weight: 600; }
       .mddtp-picker__body .mddtp-picker__viewHolder .mddtp-picker__grid span.mddtp-picker__cell--selected, .mddtp-picker__body .mddtp-picker__viewHolder .mddtp-picker__grid .mddtp-picker__tr span.mddtp-picker__cell:hover {
-        background-color: #009688;
+        background-color: #2196f3;
         color: #fff; }
       .mddtp-picker__body .mddtp-picker__viewHolder .mddtp-picker__grid span.mddtp-picker__cell--disabled {
         color: rgba(0, 0, 0, 0.26);
@@ -203,7 +203,7 @@
     cursor: pointer; }
   .mddtp-picker__years .mddtp-picker__li--current {
     font-size: 21px;
-    color: #009688; }
+    color: #2196f3; }
   .mddtp-picker__years--invisible {
     display: none; }
 
@@ -290,7 +290,7 @@
   transition: 0.3s cubic-bezier(0.42, 0, 0.58, 1); }
   .mddtp-picker__selection span {
     display: inline-block;
-    background-color: #009688;
+    background-color: #2196f3;
     height: 2px;
     vertical-align: middle; }
     .mddtp-picker__selection span.mddtp-picker__dot {
