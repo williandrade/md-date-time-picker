@@ -151,6 +151,7 @@
 			value: function _selectDialog() {
 				// now do what you normally would do
 				this._sDialog.picker = document.getElementById('mddtp-picker__' + [this._type]);
+				this._sDialog.backClosable = document.getElementById('mddtp-picker-back-closable__' + [this._type]);
 				/**
     * [sDialogEls stores all inner components of the selected dialog or sDialog to be later getElementById]
     *
@@ -174,6 +175,7 @@
 
 				mdDateTimePicker.dialog.state = !0;
 				this._sDialog.picker.classList.remove('mddtp-picker--inactive');
+				this._sDialog.backClosable.classList.remove('mddtp-picker--inactive');
 				this._sDialog.picker.classList.add(zoomIn);
 				// if the dialog is forced into portrait mode
 				if (this._orientation === 'PORTRAIT') {
@@ -244,12 +246,15 @@
 			value: function _buildDialog() {
 				var type = this._type,
 				    docfrag = document.createDocumentFragment(),
+				    backToClose = document.createElement('div'),
 				    container = document.createElement('div'),
 				    header = document.createElement('div'),
 				    body = document.createElement('div'),
 				    action = document.createElement('div'),
 				    cancel = document.createElement('button'),
 				    ok = document.createElement('button');
+				// outer most container of the picker
+
 				// outer most container of the picker
 
 				// header container of the picker
@@ -259,6 +264,11 @@
 				// action elements container
 
 				// ... add properties to them
+				backToClose.id = 'mddtp-picker-back-closable__' + type;
+				backToClose.classList.add('mddtp-picker-back-closable__' + type);
+				this._addClass(backToClose, 'backToClose');
+				backToClose.classList.add('mddtp-picker--inactive');
+
 				container.id = 'mddtp-picker__' + type;
 				container.classList.add('mddtp-picker');
 				container.classList.add('mddtp-picker-' + type);
@@ -421,6 +431,7 @@
 				// add actions to body
 				body.appendChild(action);
 				docfrag.appendChild(container);
+				docfrag.appendChild(backToClose);
 				// add the container to the end of body
 				document.getElementsByTagName('body').item(0).appendChild(docfrag);
 			}
@@ -1176,11 +1187,18 @@
 				var me = this,
 				    ok = this._sDialog.ok,
 				    cancel = this._sDialog.cancel,
+				    backClosable = this._sDialog.backClosable,
 				    onCancel = new CustomEvent('onCancel'),
 				    onOk = new CustomEvent('onOk');
 				// create cutom events to dispatch
 
 				cancel.onclick = function () {
+					me.toggle();
+					if (me._trigger) {
+						me._trigger.dispatchEvent(onCancel);
+					}
+				};
+				backClosable.onclick = function () {
 					me.toggle();
 					if (me._trigger) {
 						me._trigger.dispatchEvent(onCancel);

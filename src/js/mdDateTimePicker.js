@@ -134,6 +134,7 @@ class mdDateTimePicker {
 	_selectDialog() {
 		// now do what you normally would do
 		this._sDialog.picker = document.getElementById('mddtp-picker__' + [this._type])
+		this._sDialog.backClosable = document.getElementById('mddtp-picker-back-closable__' + [this._type])
 		/**
 		* [sDialogEls stores all inner components of the selected dialog or sDialog to be later getElementById]
 		*
@@ -162,6 +163,7 @@ class mdDateTimePicker {
 		let zoomIn = 'zoomIn'
 		mdDateTimePicker.dialog.state = true
 		this._sDialog.picker.classList.remove('mddtp-picker--inactive')
+		this._sDialog.backClosable.classList.remove('mddtp-picker--inactive')
 		this._sDialog.picker.classList.add(zoomIn)
 		// if the dialog is forced into portrait mode
 		if (this._orientation === 'PORTRAIT') {
@@ -243,6 +245,8 @@ class mdDateTimePicker {
 		let type = this._type
 		let docfrag = document.createDocumentFragment()
 		// outer most container of the picker
+		let backToClose = document.createElement('div')
+		// outer most container of the picker
 		let container = document.createElement('div')
 		// header container of the picker
 		let header = document.createElement('div')
@@ -253,6 +257,11 @@ class mdDateTimePicker {
 		let cancel = document.createElement('button')
 		let ok = document.createElement('button')
 		// ... add properties to them
+		backToClose.id = 'mddtp-picker-back-closable__' + type
+		backToClose.classList.add('mddtp-picker-back-closable__' + type)
+		this._addClass(backToClose, 'backToClose')
+		backToClose.classList.add('mddtp-picker--inactive')
+
 		container.id = 'mddtp-picker__' + type
 		container.classList.add('mddtp-picker')
 		container.classList.add('mddtp-picker-' + type)
@@ -414,6 +423,7 @@ class mdDateTimePicker {
 		// add actions to body
 		body.appendChild(action)
 		docfrag.appendChild(container)
+		docfrag.appendChild(backToClose)
 		// add the container to the end of body
 		document.getElementsByTagName('body').item(0).appendChild(docfrag)
 	}
@@ -1195,10 +1205,17 @@ class mdDateTimePicker {
 		let me = this
 		let ok = this._sDialog.ok
 		let cancel = this._sDialog.cancel
+		let backClosable = this._sDialog.backClosable
 		// create cutom events to dispatch
 		let onCancel = new CustomEvent('onCancel')
 		let onOk = new CustomEvent('onOk')
 		cancel.onclick = function() {
+			me.toggle()
+			if (me._trigger) {
+				me._trigger.dispatchEvent(onCancel)
+			}
+		}
+		backClosable.onclick = function() {
 			me.toggle()
 			if (me._trigger) {
 				me._trigger.dispatchEvent(onCancel)
