@@ -229,6 +229,7 @@ class mdDateTimePicker {
 			me._sDialog.picker.classList.remove('mddtp-picker--portrait')
 			me._sDialog.picker.classList.remove(zoomOut)
 			me._sDialog.picker.classList.add(inactive)
+			me._sDialog.backClosable.classList.add(inactive)
 			// clone elements and add them again to clear events attached to them
 			let pickerClone = picker.cloneNode(true)
 			picker.parentNode.replaceChild(pickerClone, picker)
@@ -245,7 +246,7 @@ class mdDateTimePicker {
 		let type = this._type
 		let docfrag = document.createDocumentFragment()
 		// outer most container of the picker
-		let backToClose = document.createElement('div')
+		let backClosable = document.createElement('div')
 		// outer most container of the picker
 		let container = document.createElement('div')
 		// header container of the picker
@@ -257,10 +258,10 @@ class mdDateTimePicker {
 		let cancel = document.createElement('button')
 		let ok = document.createElement('button')
 		// ... add properties to them
-		backToClose.id = 'mddtp-picker-back-closable__' + type
-		backToClose.classList.add('mddtp-picker-back-closable__' + type)
-		this._addClass(backToClose, 'backToClose')
-		backToClose.classList.add('mddtp-picker--inactive')
+		backClosable.id = 'mddtp-picker-back-closable__' + type
+		backClosable.classList.add('mddtp-picker-back-closable__' + type)
+		this._addClass(backClosable, 'backClosable')
+		backClosable.classList.add('mddtp-picker--inactive')
 
 		container.id = 'mddtp-picker__' + type
 		container.classList.add('mddtp-picker')
@@ -423,7 +424,7 @@ class mdDateTimePicker {
 		// add actions to body
 		body.appendChild(action)
 		docfrag.appendChild(container)
-		docfrag.appendChild(backToClose)
+		docfrag.appendChild(backClosable)
 		// add the container to the end of body
 		document.getElementsByTagName('body').item(0).appendChild(docfrag)
 	}

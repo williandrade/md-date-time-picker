@@ -236,6 +236,7 @@
 					me._sDialog.picker.classList.remove('mddtp-picker--portrait');
 					me._sDialog.picker.classList.remove(zoomOut);
 					me._sDialog.picker.classList.add(inactive);
+					me._sDialog.backClosable.classList.add(inactive);
 					// clone elements and add them again to clear events attached to them
 					var pickerClone = picker.cloneNode(!0);
 					picker.parentNode.replaceChild(pickerClone, picker);
@@ -246,7 +247,7 @@
 			value: function _buildDialog() {
 				var type = this._type,
 				    docfrag = document.createDocumentFragment(),
-				    backToClose = document.createElement('div'),
+				    backClosable = document.createElement('div'),
 				    container = document.createElement('div'),
 				    header = document.createElement('div'),
 				    body = document.createElement('div'),
@@ -264,10 +265,10 @@
 				// action elements container
 
 				// ... add properties to them
-				backToClose.id = 'mddtp-picker-back-closable__' + type;
-				backToClose.classList.add('mddtp-picker-back-closable__' + type);
-				this._addClass(backToClose, 'backToClose');
-				backToClose.classList.add('mddtp-picker--inactive');
+				backClosable.id = 'mddtp-picker-back-closable__' + type;
+				backClosable.classList.add('mddtp-picker-back-closable__' + type);
+				this._addClass(backClosable, 'backClosable');
+				backClosable.classList.add('mddtp-picker--inactive');
 
 				container.id = 'mddtp-picker__' + type;
 				container.classList.add('mddtp-picker');
@@ -431,7 +432,7 @@
 				// add actions to body
 				body.appendChild(action);
 				docfrag.appendChild(container);
-				docfrag.appendChild(backToClose);
+				docfrag.appendChild(backClosable);
 				// add the container to the end of body
 				document.getElementsByTagName('body').item(0).appendChild(docfrag);
 			}
